@@ -1,0 +1,14 @@
+MODEL
+	
+	Database
+					bollette
+					 id	ente importo dataEmissione dataScadenza	 scansione cod.cliente img
+		Connection
+		Dao
+		Model
+		Bollette
+
+CONTROLLER 
+
+
+VIEW
