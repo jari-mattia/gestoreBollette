@@ -1,40 +1,37 @@
 package it.java.mattia.yari.gestoreBollette.model.db;
 
 import java.awt.image.BufferedImage;
+import java.time.LocalDate;
 import java.util.Date;
 
 
+/**
+ * @author Yari&Melania
+ *
+ */
 public class Bollette {
 
 	private String numFattura;
 	private String ente;
-	private String codCliente;
-	private float importo;
-	private Date emissione;
-	private Date scadenza;
-	private BufferedImage logo ;
+	private String codCliente = null;
+	private float importo = 0;
+	private LocalDate emissione = null;
+	private LocalDate scadenza = null;
+	private BufferedImage logo = null;
+	private BufferedImage scan = null;
+	private boolean pagata = false;
 	
+	
+	/*
+	 * Constructors
+	 * */
 	
 	public Bollette() {
 	}
 
 
-	public Bollette(String numFattura, String ente) {
-		this.numFattura = numFattura;
-		this.ente = ente;
-	}
-
-
-	public Bollette(String numFattura, String ente, float importo, Date scadenza) {
-		this.numFattura = numFattura;
-		this.ente = ente;
-		this.importo = importo;
-		this.scadenza = scadenza;
-	}
-
-
-	public Bollette(String numFattura, String ente, String codCliente, float importo, Date emissione, Date scadenza,
-			BufferedImage logo) {
+	public Bollette(String numFattura, String ente, String codCliente, float importo, LocalDate emissione,
+			LocalDate scadenza, BufferedImage logo, BufferedImage scan, boolean pagata) {
 		this.numFattura = numFattura;
 		this.ente = ente;
 		this.codCliente = codCliente;
@@ -42,8 +39,15 @@ public class Bollette {
 		this.emissione = emissione;
 		this.scadenza = scadenza;
 		this.logo = logo;
+		this.scan = scan;
+		this.pagata = pagata;
 	}
 
+
+	
+	/*
+	 * Getter & Setter
+	 * */
 
 	public String getNumFattura() {
 		return numFattura;
@@ -85,22 +89,22 @@ public class Bollette {
 	}
 
 
-	public Date getEmissione() {
+	public LocalDate getEmissione() {
 		return emissione;
 	}
 
 
-	public void setEmissione(Date emissione) {
+	public void setEmissione(LocalDate emissione) {
 		this.emissione = emissione;
 	}
 
 
-	public Date getScadenza() {
+	public LocalDate getScadenza() {
 		return scadenza;
 	}
 
 
-	public void setScadenza(Date scadenza) {
+	public void setScadenza(LocalDate scadenza) {
 		this.scadenza = scadenza;
 	}
 
@@ -113,6 +117,45 @@ public class Bollette {
 	public void setLogo(BufferedImage logo) {
 		this.logo = logo;
 	}
+
+
+	public BufferedImage getScan() {
+		return scan;
+	}
+
+
+	public void setScan(BufferedImage scan) {
+		this.scan = scan;
+	}
+
+
+	public boolean isPagata() {
+		return pagata;
+	}
+
+
+	public void setPagata(boolean pagata) {
+		this.pagata = pagata;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Bollette [numFattura=" + numFattura + ", ente=" + ente + ", codCliente=" + codCliente + ", importo="
+				+ importo + ", emissione=" + emissione + ", scadenza=" + scadenza + ", logo=" + logo + ", scan=" + scan
+				+ ", pagata=" + pagata + ", getNumFattura()=" + getNumFattura() + ", getEnte()=" + getEnte()
+				+ ", getCodCliente()=" + getCodCliente() + ", getImporto()=" + getImporto() + ", getEmissione()="
+				+ getEmissione() + ", getScadenza()=" + getScadenza() + ", getLogo()=" + getLogo() + ", getScan()="
+				+ getScan() + ", isPagata()=" + isPagata() + ", toString()=" + super.toString() + "]";
+	}
+	
+	
+
+	/*
+	 * toString
+	 * */
+	
+	
 	
 	
 }
