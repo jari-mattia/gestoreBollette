@@ -12,3 +12,18 @@ CONTROLLER
 
 
 VIEW
+
+
+
+				DATABASE STRUCTURE
+				
+BOLLETTE				CLIENTE					ENTE	
+
+cod_fattura	pk			cod_cliente	pk	fk		id pk fk
+id ente	pk				nome					ente  
+cod_cliente				cognome					logo
+importo					
+emissione
+scadenza
+scansione
+pagata

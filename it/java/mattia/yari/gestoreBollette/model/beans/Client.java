@@ -1,44 +1,28 @@
-package it.java.mattia.yari.gestoreBollette.model.db;
+package it.java.mattia.yari.gestoreBollette.model.beans;
 
 public class Client {
 
 	
-	private String clientID;
+	String clientID;
 	private String name;
 	private String lastName;
 	
 	
-	/* every fields must be not null */
-	public Client(String clientID, String name, String lastName) {
-		
-		this.clientID = clientID;
-		this.name = name;
-		this.lastName = lastName;
-	}
-
 	/* Getter and Setter  */
 	
+	/* Client ID from Invoice */
 	public String getClientID() {
 		return clientID;
 	}
-
-
-	public boolean setClientID(String clientID) {
-		
-		if(clientID != null) {
-			this.clientID = clientID;
-			return true;
-		}else{
-			System.out.println("the field 'Client ID' cannpt be empty");
-			return false;
-			}
+	
+	public void setClientID(Invoice i) {
+		this.clientID = i.getClientID();
 	}
 
 
 	public String getName() {
 		return name;
 	}
-
 
 	public boolean setName(String name) {
 		
@@ -53,7 +37,7 @@ public class Client {
 				}
 			
 		}else{
-			System.out.println("the field 'name' cannpt be empty");
+			System.out.println("the field 'name' cannot be empty");
 			return false;
 			}
 	}
@@ -78,7 +62,7 @@ public class Client {
 				}
 			
 		}else{
-			System.out.println("the field 'lastName' cannpt be empty");
+			System.out.println("the field 'lastName' cannot be empty");
 			return false;
 			}
 		}
