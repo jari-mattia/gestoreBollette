@@ -1,6 +1,6 @@
 package it.java.mattia.yari.invoicesManager.model.beans;
 
-import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.time.LocalDate;
 
 
@@ -18,7 +18,9 @@ public class Invoice {
 	private float amount;
 	private LocalDate release;
 	private LocalDate dueDate;
-	private BufferedImage scan;
+	private LocalDate referencePeriodStart;
+	private LocalDate referencePeriodEnd;
+	private InputStream scan;
 	private boolean paid;
 	
 	
@@ -140,11 +142,47 @@ public class Invoice {
 		}
 	}
 	
+	/*  Reference period start */
+	public LocalDate getReferencePeriodStart() {
+		return referencePeriodStart;
+	}
+	
+	public boolean setReferencePeriodStart(LocalDate referencePeriodStart) {
+		if(referencePeriodStart != null) {
+				this.referencePeriodStart = referencePeriodStart;
+				return true;
+		}else {
+			System.out.println("Must insert a valid reference start date");
+			return false;
+		}
+	}
+	
+	/* Reference period end */
+	public LocalDate getReferencePeriodEnd() {
+		return referencePeriodEnd;
+	}
+	
+	public boolean setReferencePeriodEnd(LocalDate referencePeriodEnd) {
+		if(referencePeriodEnd != null) {
+			if(referencePeriodEnd.isAfter(this.getRelease()) == false) {
+				System.out.println("The reference date end must be next to reference end date");
+				return false;
+			}else {
+				this.referencePeriodEnd = referencePeriodEnd;
+				return true;
+			}		
+	}else {
+		System.out.println("Must insert a valid due date");
+		return false;
+		}
+	}
+	
+	
 	/*  Scan */
-	public BufferedImage getScan() {
+	public InputStream getScan() {
 		return scan;
 	}
-	public boolean setScan(BufferedImage scan) {
+	public boolean setScan(InputStream scan) {
 		if( scan != null ) {
 			this.scan = scan;
 			return true;
@@ -170,14 +208,14 @@ public class Invoice {
 	/* toString */
 	@Override
 	public String toString() {
-		return "Invoice [invoiceID=" + invoiceID + ", supplierName=" + supplier.getSupplierName() + ", clientID=" + client.getClientID()
-				+ ", amount=" + amount + ", release=" + release + ", dueDate=" + dueDate + ", scan=" + scan + ", paid="
+		return "Invoice [ID=" + ID + ", invoiceID=" + invoiceID + ", supplier=" + supplier.getSupplierName() + ", client=" + client.getClientID()
+				+ ", amount=" + amount + ", release=" + release + ", dueDate=" + dueDate + ", referencePeriodStart="
+				+ referencePeriodStart + ", referencePeriodEnd=" + referencePeriodEnd + ", scan=" + scan + ", paid="
 				+ paid + "]";
 	}
 
-
-	@Override
 	/* hashCode */
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -187,15 +225,16 @@ public class Invoice {
 		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
 		result = prime * result + ((invoiceID == null) ? 0 : invoiceID.hashCode());
 		result = prime * result + (paid ? 1231 : 1237);
+		result = prime * result + ((referencePeriodEnd == null) ? 0 : referencePeriodEnd.hashCode());
+		result = prime * result + ((referencePeriodStart == null) ? 0 : referencePeriodStart.hashCode());
 		result = prime * result + ((release == null) ? 0 : release.hashCode());
 		result = prime * result + ((scan == null) ? 0 : scan.hashCode());
 		result = prime * result + ((supplier == null) ? 0 : supplier.hashCode());
 		return result;
 	}
 
-
-	@Override
 	/*  equals */
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -225,6 +264,16 @@ public class Invoice {
 			return false;
 		if (paid != other.paid)
 			return false;
+		if (referencePeriodEnd == null) {
+			if (other.referencePeriodEnd != null)
+				return false;
+		} else if (!referencePeriodEnd.equals(other.referencePeriodEnd))
+			return false;
+		if (referencePeriodStart == null) {
+			if (other.referencePeriodStart != null)
+				return false;
+		} else if (!referencePeriodStart.equals(other.referencePeriodStart))
+			return false;
 		if (release == null) {
 			if (other.release != null)
 				return false;
@@ -242,12 +291,7 @@ public class Invoice {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-    
+	    
 }
 	
 	
