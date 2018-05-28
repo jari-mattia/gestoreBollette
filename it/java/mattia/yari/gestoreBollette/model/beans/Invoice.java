@@ -6,15 +6,15 @@ import java.time.LocalDate;
 
 
 /**
- * @author Yari&Melania
+ * @author Yari Mattia
  * 
  */
 public class Invoice {
 	
 	private int ID;
 	private String invoiceID ;
-	private String supplierName;
-	private String clientID;
+	private Supplier supplier;
+	private Client client;
 	private float amount;
 	private LocalDate release;
 	private LocalDate dueDate;
@@ -23,18 +23,19 @@ public class Invoice {
 	
 	
 	
+	/* CONSTRUCTOR */
+	public Invoice() {
+	}
+
+
+	/*  GETTER & SETTER METHODS */
 	
-	/*  Getters AND Setters Methods */
 	
-	
-	/* ID  */
+	/* ID read-only from DB  */
 	public int getID() {
 		return ID;
 	}
 	
-	public void setID(int id) {
-		this.ID = id;
-	}
 	
 	/*  Invoice ID */
 	public String getInvoiceID() {
@@ -59,46 +60,34 @@ public class Invoice {
 	}
 	
 	/* Supplier Name */
-	public String getSupplierName() {
-		return supplierName;
+	public Supplier getSupplierName() {
+		return supplier;
 	}
 	
-	public boolean setSupplierName(String supplierName) {
-		if( supplierName != null ) {
-			if(supplierName.matches("[^\\s'\"]{2,25}")) {
-				this.supplierName = supplierName;
-				return true;
-				}else {
-					System.out.println("invalid field 'supplier name'");
-					return false;
-				}
-		}
-		else {
-			System.out.println("the field 'supplier name' cannot be empty");
-		}
-	  return false;
+	public boolean setSupplierName(Supplier supplier) {
+		if(supplier != null) {
+			this.supplier = supplier;
+			return true;
+			}else {
+				System.out.println("there is a supplier associated to this invoice");
+				return false;
+			}
 	}
 	
 	
 	/* Client ID */
-	public String getClientID() {
-		return clientID;
+	public Client getClient() {
+		return client;
 	}
 	
-	public boolean setClientID(String clientID) {
-		if( clientID != null ) {
-			if(clientID.matches("[A-Za-z0-9]{2,}")) {
-				this.clientID = clientID;
-				return true;
-				}else {
-					System.out.println("invalid field 'client ID'");
-					return false;
-				}
+	public boolean setClientID(Client client) {
+		if(client != null) {
+			this.client = client;
+			return true;
+		}else {
+			System.out.println("there is a supplier associated to this invoice");
+			return false;
 		}
-		else {
-			System.out.println("the field 'client ID' cannot be empty");
-		}
-	  return false;
 	}
 	
 	/* Amount  */
@@ -175,12 +164,83 @@ public class Invoice {
 		this.paid = paid;
 	}
 	
+	
+	/* INHERETIED METHODS */
+	
 	/* toString */
 	@Override
 	public String toString() {
-		return "Invoice [invoiceID=" + invoiceID + ", supplierName=" + supplierName + ", clientID=" + clientID
+		return "Invoice [invoiceID=" + invoiceID + ", supplierName=" + supplier.getSupplierName() + ", clientID=" + client.getClientID()
 				+ ", amount=" + amount + ", release=" + release + ", dueDate=" + dueDate + ", scan=" + scan + ", paid="
 				+ paid + "]";
+	}
+
+
+	@Override
+	/* hashCode */
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ID;
+		result = prime * result + Float.floatToIntBits(amount);
+		result = prime * result + ((client == null) ? 0 : client.hashCode());
+		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
+		result = prime * result + ((invoiceID == null) ? 0 : invoiceID.hashCode());
+		result = prime * result + (paid ? 1231 : 1237);
+		result = prime * result + ((release == null) ? 0 : release.hashCode());
+		result = prime * result + ((scan == null) ? 0 : scan.hashCode());
+		result = prime * result + ((supplier == null) ? 0 : supplier.hashCode());
+		return result;
+	}
+
+
+	@Override
+	/*  equals */
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Invoice other = (Invoice) obj;
+		if (ID != other.ID)
+			return false;
+		if (Float.floatToIntBits(amount) != Float.floatToIntBits(other.amount))
+			return false;
+		if (client == null) {
+			if (other.client != null)
+				return false;
+		} else if (!client.equals(other.client))
+			return false;
+		if (dueDate == null) {
+			if (other.dueDate != null)
+				return false;
+		} else if (!dueDate.equals(other.dueDate))
+			return false;
+		if (invoiceID == null) {
+			if (other.invoiceID != null)
+				return false;
+		} else if (!invoiceID.equals(other.invoiceID))
+			return false;
+		if (paid != other.paid)
+			return false;
+		if (release == null) {
+			if (other.release != null)
+				return false;
+		} else if (!release.equals(other.release))
+			return false;
+		if (scan == null) {
+			if (other.scan != null)
+				return false;
+		} else if (!scan.equals(other.scan))
+			return false;
+		if (supplier == null) {
+			if (other.supplier != null)
+				return false;
+		} else if (!supplier.equals(other.supplier))
+			return false;
+		return true;
 	}
 	
 	
