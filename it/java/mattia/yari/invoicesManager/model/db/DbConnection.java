@@ -1,4 +1,4 @@
-package it.java.mattia.yari.gestoreBollette.model.db;
+package it.java.mattia.yari.invoicesManager.model.db;
 
 import java.io.File;
 import java.sql.Connection;

@@ -1,8 +1,8 @@
-package it.java.mattia.yari.gestoreBollette.model.db;
+package it.java.mattia.yari.invoicesManager.model.db;
 
 import java.util.List;
 
-import it.java.mattia.yari.gestoreBollette.model.beans.Invoice;
+import it.java.mattia.yari.invoicesManager.model.beans.Invoice;
 
 public interface Dao {
 

@@ -1,4 +1,4 @@
-package it.java.mattia.yari.gestoreBollette.model.db;
+package it.java.mattia.yari.invoicesManager.model.db;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -14,7 +14,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-import it.java.mattia.yari.gestoreBollette.model.beans.Invoice;
+
+import it.java.mattia.yari.invoicesManager.model.beans.Invoice;
 
 
 

@@ -1,10 +1,10 @@
-package it.java.mattia.yari.gestoreBollette.model;
+package it.java.mattia.yari.invoicesManager.model;
 
 
 
 import java.time.LocalDate;
 
-import it.java.mattia.yari.gestoreBollette.model.beans.Invoice;
+import it.java.mattia.yari.invoicesManager.model.beans.Invoice;
 
 
 public class TestModel {

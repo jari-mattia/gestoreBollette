@@ -1,4 +1,4 @@
-package it.java.mattia.yari.gestoreBollette.model.beans;
+package it.java.mattia.yari.invoicesManager.model.beans;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
