@@ -18,7 +18,7 @@ public class DbConnection {
 			HikariConfig config = new HikariConfig();
 			
 			/* driver configuration  */
-			config.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/invoicesmanager");
+			config.setJdbcUrl(cp.getProperty("jdbcUrl"));
 			config.setUsername(cp.getProperty("user"));
 			config.setPassword(cp.getProperty("password"));
 			config.addDataSourceProperty("cachePrepStmts", cp.getProperty("cachePrepStmts"));
