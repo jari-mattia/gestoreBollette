@@ -38,7 +38,7 @@ public class ConfigurationProperties extends Properties{
 		super();
 		FileInputStream is;
 		try {
-			is = new FileInputStream("../lib/configuration.properties");
+			is = new FileInputStream("../gestoreBollette/lib/config.properties");
 			this.load(is);
 		} catch (FileNotFoundException e) {
 			System.out.println("Configuration file not found in /lib folder");
@@ -47,13 +47,13 @@ public class ConfigurationProperties extends Properties{
 			System.out.println("error to load config file");
 			e.getMessage();
 		}
-		
+		/*
 		this.dataSourceClassName = this.getProperty(dataSourceClassName);
 		this.jdbcUrl = this.getProperty(jdbcUrl);
 		this.user = this.getProperty(user);
 		this.password = this.getProperty(password);
 		this.databaseName = this.getProperty(databaseName);
-		this.portNumber = this.getProperty(databaseName);
+		this.portNumber = this.getProperty(portNumber);
 		this.serverName = this.getProperty(serverName);
 		this.cachePrepStmts = this.getProperty(cachePrepStmts);
 		this.prepStmtCacheSize = this.getProperty(prepStmtCacheSize);
@@ -64,7 +64,7 @@ public class ConfigurationProperties extends Properties{
 		this.cacheResultSetMetadata = this.getProperty(cacheResultSetMetadata);
 		this.cacheServerConfiguration = this.getProperty(cacheServerConfiguration);
 		this.elideSetAutoCommits = this.getProperty(elideSetAutoCommits);
-		this.maintainTimeStats = this.getProperty(maintainTimeStats);
+		this.maintainTimeStats = this.getProperty(maintainTimeStats);*/
 	}
 
 

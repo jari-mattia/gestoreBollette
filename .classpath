@@ -6,9 +6,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/yari/git/gestoreBollette/lib/mysql-connector-java-5.1.46.jar"/>
-	<classpathentry kind="lib" path="lib/HikariCP-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/HikariCP-3.1.0.jar" sourcepath="lib/HikariCP-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.46.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.25-sources.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.25-sources.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.25.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

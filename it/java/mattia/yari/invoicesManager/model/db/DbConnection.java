@@ -18,19 +18,19 @@ public class DbConnection {
 			HikariConfig config = new HikariConfig();
 			
 			/* driver configuration  */
-			config.setJdbcUrl(cp.getJdbcUrl());
-			config.setUsername(cp.getUser());
-			config.setPassword(cp.getPassword());
-			config.addDataSourceProperty("cachePrepStmts", cp.getCachePrepStmts());
-			config.addDataSourceProperty("prepStmtCacheSize", cp.getPrepStmtCacheSize());
-			config.addDataSourceProperty("prepStmtCacheSqlLimit", cp.getPrepStmtCacheSqlLimit());
-			config.addDataSourceProperty("useServerPrepStmts", cp.getUseServerPrepStmts());
-			config.addDataSourceProperty("useLocalSessionState", cp.getUseLocalSessionState());
-			config.addDataSourceProperty("rewriteBatchedStatements", cp.getRewriteBatchedStatements());
-			config.addDataSourceProperty("cacheResultSetMetadata", cp.getCacheResultSetMetadata());
-			config.addDataSourceProperty("cacheServerConfiguration", cp.getCacheServerConfiguration());
-			config.addDataSourceProperty("elideSetAutoCommits", cp.getElideSetAutoCommits());
-			config.addDataSourceProperty("maintainTimeStats", cp.getMaintainTimeStats());
+			config.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/invoicesmanager");
+			config.setUsername(cp.getProperty("user"));
+			config.setPassword(cp.getProperty("password"));
+			config.addDataSourceProperty("cachePrepStmts", cp.getProperty("cachePrepStmts"));
+			config.addDataSourceProperty("prepStmtCacheSize", cp.getProperty("prepStmtCacheSize"));
+			config.addDataSourceProperty("prepStmtCacheSqlLimit", cp.getProperty("prepStmtCacheSqlLimit"));
+			config.addDataSourceProperty("useServerPrepStmts", cp.getProperty("useServerPrepStmts"));
+			config.addDataSourceProperty("useLocalSessionState", cp.getProperty("useLocalSessionState"));
+			config.addDataSourceProperty("rewriteBatchedStatements", cp.getProperty("rewriteBatchedStatements"));
+			config.addDataSourceProperty("cacheResultSetMetadata", cp.getProperty("cacheResultSetMetadata"));
+			config.addDataSourceProperty("cacheServerConfiguration", cp.getProperty("cacheServerConfiguration"));
+			config.addDataSourceProperty("elideSetAutoCommits", cp.getProperty("elideSetAutoCommits"));
+			config.addDataSourceProperty("maintainTimeStats", cp.getProperty("maintainTimeStats"));
 
 			ds = new HikariDataSource(config);
 
