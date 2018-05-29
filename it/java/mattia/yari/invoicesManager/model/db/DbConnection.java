@@ -1,42 +1,50 @@
 package it.java.mattia.yari.invoicesManager.model.db;
 
-import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class DbConnection {
 
+	private static HikariDataSource ds ;
 	
-	private Connection conn;
-	private File file = new File("../GestoreBollette/lib/conf.properties");
-	private static DbConnection dbConn;
-	private Configure conf = new Configure(file); 
-	private String url = conf.getProperty("url");
 	
-	private DbConnection(){
-		try {
-		conn = DriverManager.getConnection(url, conf);
+	public static Connection getConnection(){
+		
+		if(ds == null) {
+			ConfigurationProperties cp = new ConfigurationProperties();
+			HikariConfig config = new HikariConfig();
+			
+			/* driver configuration  */
+			config.setJdbcUrl(cp.getJdbcUrl());
+			config.setUsername(cp.getUser());
+			config.setPassword(cp.getPassword());
+			config.addDataSourceProperty("cachePrepStmts", cp.getCachePrepStmts());
+			config.addDataSourceProperty("prepStmtCacheSize", cp.getPrepStmtCacheSize());
+			config.addDataSourceProperty("prepStmtCacheSqlLimit", cp.getPrepStmtCacheSqlLimit());
+			config.addDataSourceProperty("useServerPrepStmts", cp.getUseServerPrepStmts());
+			config.addDataSourceProperty("useLocalSessionState", cp.getUseLocalSessionState());
+			config.addDataSourceProperty("rewriteBatchedStatements", cp.getRewriteBatchedStatements());
+			config.addDataSourceProperty("cacheResultSetMetadata", cp.getCacheResultSetMetadata());
+			config.addDataSourceProperty("cacheServerConfiguration", cp.getCacheServerConfiguration());
+			config.addDataSourceProperty("elideSetAutoCommits", cp.getElideSetAutoCommits());
+			config.addDataSourceProperty("maintainTimeStats", cp.getMaintainTimeStats());
+
+			ds = new HikariDataSource(config);
+
 		}
-		catch(SQLException ex) {
-			    System.out.println("SQLException: " + ex.getMessage());
-			    System.out.println("SQLState: " + ex.getSQLState());
-			    System.out.println("VendorError: " + ex.getErrorCode());
+		try {
+			return ds.getConnection();
+		
+		}
+		catch(SQLException e) {
+			    System.err.println("Errore di connessione al db");
+			    throw new RuntimeException(e);
 			}
 	}
 	
-public static DbConnection getInstance() {
-	if(dbConn == null) {
-		dbConn = new DbConnection();
-		}
-		return dbConn;
-	}
-
-public Connection getConn() {
-	return conn;
-}
-
 
 }
 	

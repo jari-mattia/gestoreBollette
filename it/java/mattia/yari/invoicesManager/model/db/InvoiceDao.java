@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,17 +29,17 @@ public class InvoiceDao implements Dao {
 	@Override
 	/* return all from table Invoice */
 	public  List<Invoice> getAll() {
-		List<Invoice>result = new ArrayList<Invoice>(); 
-		DbConnection db = DbConnection.getInstance();
+		List<Invoice>result = new ArrayList<Invoice>();
+		Connection conn = DbConnection.getConnection();
 		String sql = "SELECT * FROM invoice";
 		try {
-				PreparedStatement ps = db.getConn().prepareStatement(sql);
+				PreparedStatement ps = conn.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();
 				while(rs.next()) {
 					Invoice invoice = filterInvoiceOutput(rs);
 					result.add(invoice);
 					
-				db.getConn().close();
+				conn.close();
 				return result;
 				
 			}
@@ -53,10 +54,10 @@ public class InvoiceDao implements Dao {
 	/*return one invoice correspond to invoice ID & supplierName */
 	public Invoice get(String invoiceID, String supplierName) {
 		Invoice invoice = new Invoice();
-		DbConnection db = DbConnection.getInstance();
+		Connection conn = DbConnection.getConnection();
 		String sql = "SELECT * FROM invoice WHERE invoiceID = ? AND supplierName = ?";
 		try {
-			PreparedStatement ps = db.getConn().prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, invoiceID);
 			ps.setString(2, supplierName);
 			ResultSet rs = ps.executeQuery();
@@ -64,7 +65,7 @@ public class InvoiceDao implements Dao {
 				Invoice i = filterInvoiceOutput(rs);
 				invoice = i;
 			}
-			db.getConn().close();
+			conn.close();
 			return invoice;
 			
 		} catch (SQLException e) {
@@ -77,11 +78,11 @@ public class InvoiceDao implements Dao {
 	@Override
 	/* insert a new invoice into DB */
 	public boolean add(Invoice i) {
-		DbConnection db = DbConnection.getInstance();
+		Connection conn = DbConnection.getConnection();
 		String sql = "INSERT INTO invoice (invoiceID, supplierName, clientID, amount, release, dueDate, scan, paid) VALUES (?,?,?,?,?,?,?,?)";
 		try {
 			
-			PreparedStatement ps = db.getConn().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, i.getInvoiceID());
 			ps.setString(2, i.getSupplierName());
 			ps.setString(3, i.getClientID());
@@ -107,12 +108,12 @@ public class InvoiceDao implements Dao {
 	@Override
 	/*Update an invoice*/
 	public  boolean update(Invoice i) {
-		DbConnection db = DbConnection.getInstance();
+		Connection conn = DbConnection.getConnection();
 		String sql = "UPDATE invoice SET invoiceID = ?, supplierName = ?, clientID = ?, amount = ?, release = ?, dueDate = ?, scan = ?, paid = ?"
 					+"WHERE ID = ?";
 			try {
 	
-				PreparedStatement ps = db.getConn().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+				PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 				ps.setString(1, i.getInvoiceID());
 				ps.setString(2, i.getSupplierName());
 				ps.setString(3, i.getClientID());
@@ -138,11 +139,11 @@ public class InvoiceDao implements Dao {
 	@Override
 	/*  Delete an invoice by ID  */
 	public boolean delete(Invoice i) {
-		DbConnection db = DbConnection.getInstance();
+		Connection conn = DbConnection.getConnection();
 		String sql = "DELETE FROM invoice WHERE ID = ?";
 		try {
 			
-			PreparedStatement ps = db.getConn().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, i.getID());
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
